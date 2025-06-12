@@ -26,7 +26,15 @@ class NotionTaskRandomizer:
         tasks = self.get_tasks()
         if not tasks:
             return None
-        selected_task = random.choice(tasks)
+
+        weighted_tasks = []
+        for task in tasks:
+            task_type = task["properties"]["Type"]['title'][0]["text"]["content"]
+            weighted_tasks.append(task)
+            if task_type == "Priorities":
+                weighted_tasks.append(task)
+
+        selected_task = random.choice(weighted_tasks)
         task_info = {
             "title": selected_task["properties"]["Content"]["rich_text"][0]["text"]["content"],
             "type": selected_task["properties"]["Type"]['title'][0]["text"]["content"],
@@ -35,6 +43,12 @@ class NotionTaskRandomizer:
         return task_info
 
 # --- Streamlit UI ---
+st.set_page_config(
+    page_title="Task Randomizer",
+    page_icon="🎲",
+    layout="centered"
+)
+
 st.title("🎲 Notion Task Randomizer")
 
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN", "")

@@ -10,6 +10,7 @@ Built with Python, Streamlit, and the Notion API.
 ## Features
 
 - 🎲 Randomly selects a task from your Notion database
+- 💪 Priority tasks appear twice as often as all other tasks
 - 🔗 Direct link to open the task in Notion
 - 🖥️ Clean, user-friendly web interface (Streamlit)
 - 🔒 Secure: credentials are not stored
